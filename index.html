@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hotel Santika Blitar Receipt</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #e6e1d6;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #333;
+    }
+
+    .page {
+      width: 800px;
+      margin: 30px auto;
+      background: #f7f4ec;
+      padding: 32px 40px 40px;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* LOGO WATERMARK DI ATAS TULISAN */
+    .header-watermark {
+      position: absolute;
+      top: 40%;                  
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 260px;              
+      opacity: 0.14;             
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .header-watermark img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* TULISAN WATERMARK BESAR */
+    .watermark {
+      position: absolute;
+      font-size: 90px;
+      font-weight: 700;
+      color: rgba(200, 190, 165, 0.15);
+      left: 50%;
+      top: 55%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 0;
+    }
+
+    /* HEADER */
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #c4aa67;
+      padding-bottom: 18px;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-logo img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+    }
+
+    .hotel-title-block {
+      flex: 1;
+      text-align: center;
+      padding-right: 80px;
+    }
+
+    .hotel-name {
+      font-size: 26px;
+      letter-spacing: 1px;
+      font-weight: 700;
+      color: #384846;
+    }
+
+    .hotel-tagline {
+      margin-top: 4px;
+      font-size: 12px;
+      color: #8b8b8b;
+    }
+
+    .hotel-contact {
+      margin-top: 10px;
+      font-size: 10px;
+      color: #666;
+    }
+
+    /* Main info blocks */
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .info-block {
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .info-block h4 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      color: #445552;
+    }
+
+    .info-label {
+      font-weight: 600;
+    }
+
+    /* Table */
+    .section-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      color: #445552;
+      position: relative;
+      z-index: 1;
+    }
+
+    .table-wrapper {
+      margin-top: 10px;
+      border-top: 1px solid #c4c4c4;
+      position: relative;
+      z-index: 1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    thead th {
+      text-align: left;
+      padding: 10px 6px;
+      font-weight: 600;
+      border-bottom: 1px solid #c4c4c4;
+    }
+
+    tbody td {
+      padding: 10px 6px;
+      border-bottom: 1px solid #e1ddcf;
+    }
+
+    .text-right {
+      text-align: right;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .amount-summary {
+      margin-top: 8px;
+      width: 45%;
+      margin-left: auto;
+      font-size: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .amount-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 3px 0;
+    }
+
+    .amount-row.total {
+      margin-top: 4px;
+      padding-top: 6px;
+      border-top: 1px solid #c4c4c4;
+      font-weight: 700;
+    }
+
+    /* Payment & Notes */
+    .bottom-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid #c4c4c4;
+      font-size: 11px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .bottom-column {
+      width: 48%;
+      line-height: 1.6;
+    }
+
+    .bottom-column h4 {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      color: #445552;
+    }
+
+    .notes-list {
+      margin-top: 4px;
+      padding-left: 16px;
+    }
+
+    .notes-list li {
+      margin-bottom: 4px;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid #d1c6aa;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: #555;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-col {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .footer-icon {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1px solid #c4aa67;
+      font-size: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- LOGO WATERMARK DI ATAS TULISAN -->
+    <div class="header-watermark">
+      <img src="bg1.png" alt="Logo Watermark">
+    </div>
+
+    <!-- TULISAN WATERMARK -->
+    <div class="watermark">Hotel Santika</div>
+
+    <!-- HEADER -->
+    <div class="header-top">
+      <div class="header-logo">
+        <img src="logosantika.png" alt="Hotel Santika Logo">
+      </div>
+
+      <div class="hotel-title-block">
+        <div class="hotel-name">HOTEL SANTIKA BLITAR</div>
+        <div class="hotel-tagline">Hospitality from the Heart</div>
+        <div class="hotel-contact">
+          Jl. Ir. Soekarno, Kelurahan Bendogerit, Kecamatan Sananwetan, Kota Blitar 66133 Jawa Timur | Email: blitar@reservation.santika.com | Tel: (0342) 446-8888 | WhatsApp: +62 852-3515-8880
+        </div>
+      </div>
+    </div>
+
+    <!-- RECEIPT INFO -->
+    <div class="info-row">
+      <div class="info-block">
+        <h4>Receipt No:</h4>
+        <div>RCP/HS/BLTR/121125/0124</div>
+
+        <div style="margin-top: 14px;">
+          <div class="info-label">Guest Name:</div>
+          <div>Najib Yaman</div>
+          <div>binyaman10@gmail.com</div>
+          <div>+62 821-3435-1716</div>
+        </div>
+      </div>
+
+      <div class="info-block" style="text-align:right;">
+        <div>
+          <span class="info-label">Check-In Date:</span><br />
+          12 November 2025
+        </div>
+        <div style="margin-top: 10px;">
+          <span class="info-label">Check-Out Date:</span><br />
+          14 November 2025
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="section-title">Hotel Santika Blitar Customer Payment</div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th class="text-center">Qty.</th>
+            <th class="text-right">Unit Price</th>
+            <th class="text-right">Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Room Charge<br />Deluxe Room (B-607)</td>
+            <td class="text-center">2 Nights</td>
+            <td class="text-right">IDR 495.400</td>
+            <td class="text-right">IDR 990.800</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- AMOUNTS -->
+    <div class="amount-summary">
+      <div class="amount-row">
+        <div>Subtotal:</div>
+        <div>IDR 990.800</div>
+      </div>
+      <div class="amount-row">
+        <div>VAT (11%):</div>
+        <div>IDR 110.120</div>
+      </div>
+      <div class="amount-row">
+        <div>Service Charge (10%):</div>
+        <div>IDR 99.080</div>
+      </div>
+      <div class="amount-row total">
+        <div>Grand Total :</div>
+        <div>IDR 1.200.000</div>
+      </div>
+    </div>
+
+    <!-- PAYMENT & NOTES -->
+    <div class="bottom-row">
+      <div class="bottom-column">
+        <h4>Payment Information:</h4>
+        <p style="margin-top:4px; font-weight:600;">Debit Card</p>
+        <p>
+          Bank Name: Bank Syariah Indonesia<br />
+          Authorization Code: #DS12730K<br />
+          Transaction Time: 12 Nov 2025, 13:58 PM
+        </p>
+        <p style="margin-top:10px; font-size:10px;">
+          This receipt has been officially verified and digitally recorded by our system.
+        </p>
+        <p style="margin-top:14px; font-size:10px;">
+          Please scan the QR code to<br />
+          view the digital record.
+        </p>
+      </div>
+
+      <div class="bottom-column">
+        <h4>Notes:</h4>
+        <ul class="notes-list">
+          <li>This receipt confirms full payment has been received for the listed services.</li>
+          <li>For any questions regarding this receipt, please contact our billing department.</li>
+          <li>Please retain this document for your records.</li>
+          <li>This receipt is electronically verified. Scan for details.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-col">
+        <div class="footer-icon">📍</div>
+        <span>Jl. Ir. Soekarno, Bendogerit, Blitar, East Java</span>
+      </div>
+      <div class="footer-col">
+        <div class="footer-icon">☎</div>
+        <span>(0342) 446-8888</span>
+      </div>
+      <div class="footer-col">
+        <div class="footer-icon">@</div>
+        <span>blitar@reservation.santika.com</span>
+      </div>
+      <div class="footer-col">
+        <div class="footer-icon">💬</div>
+        <span>+62 852-3515-8880</span>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
